@@ -163,51 +163,6 @@
         console.log(this.$data.registro)
       
     }
-            // reg_year:datos[0].reg_year,
-            // reg_value:datos[0].reg_value,
-            // reg_course_type:datos[0].reg_course_type.id,
-            // reg_group_type:datos[0].reg_group_type.id,
-            // student_history_type:datos[0].student_history_type.id,
-            // school_level:datos[0].school_level.id,
-            // regist_status_type:datos[0].regist_status_type.id,
-            // stu_id:datos[0].stu_id.id,
-//   return {
-//     Lista: [],
-//     }
-//     },
-//     methods: {
-//     editar() {
-//         let post = {
-//             //"id": this.Lista.id,
-//             "regisId": this.Lista.regisId,
-//             "reg_year": this.Lista.reg_year,
-//             "reg_value": this.Lista.reg_value,
-//             "reg_course_type": this.Lista.reg_course_type,
-//             "reg_group_type": this.Lista.reg_group_type,
-//             "student_history_type": this.Lista.student_history_type,
-//             "school_level": this.Lista.school_level,
-//             "regist_status_type": this.Lista.regist_status_type,
-//             "stu_id": this.Lista.stu_id,
-//         }
-//         axios.put("http://localhost:8000/api/persona/" + this.$route.params.id + "/", post).then(result => {
-//             console.log(result);
-//             //this.Lista.id="";
-//             this.Lista.pers_nombre="";
-//             this.Lista.pers_apellido="";
-//             this.Lista.pers_identificacion="";
-//             this.Lista.tipo_identificacion="";
-//         })
-//     },
-//     },
-
-//     mounted() {
-//     let id = this.$route.params.id;
-//     let direccion = "http://localhost:8000/api/persona/"
-//     axios.get(direccion + id).then(data => {
-//         this.Lista = data.data;
-//     })
-//     },
-
   
     }
   </script>

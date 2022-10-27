@@ -40,10 +40,10 @@
                     <td>{{dato.per_birth_date}}</td>
                     <td>{{dato.per_personal_phone}}</td>
                     <td>
-                      <!-- <button type="button" class="btn btn-primary" v-on:click="editar(dato.id)">
+                      <button type="button" class="btn btn-secondary" v-on:click="editar(dato.id)">
                           <i class="nc-icon nc-settings-tool-66 hidden-lg-up"></i>
                         &nbsp Editar
-                        </button> -->
+                      </button>
                   
                         &nbsp
                       <button type="button"  class="btn btn-danger" v-on:click="eliminar(dato.id)">
@@ -86,19 +86,18 @@
         }
       },
       methods:{
-      // editar(id) {
-      //   console.log(id)
-      //   this.$router.push('create-ae/' + id);
-      // },
-      eliminar(id) {
+        editar(id) {
         console.log(id)
-
+        this.$router.push('edit-persona/' + id);
+      },
+      eliminar(id) {
           var op = window.confirm('¿Desea Eliminar el registro?')
 
           if (op){
           axios.delete("http://127.0.0.1:8000/api/Person/" + id + "/").then(result => {
-          this.mounted()
+
           console.log(result);
+          window.location.reload();
            })
        }
       },
