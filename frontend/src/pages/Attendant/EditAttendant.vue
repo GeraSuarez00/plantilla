@@ -11,35 +11,36 @@
                 
                 <div class="row">
                   <div class="col-8">
-                  <h4 class="card-title">Registro de Acudientes</h4>
+                  <h4 class="card-title">Editar Acudiente</h4>
                   </div>
                 </div> 
                </template>
                <template slot="header">
                 
-                <form >
-                  <div class="form-group row">
-                    <label class="col-sm-5">Ocupación</label>
-                    <div class="col-sm-6">
-                        <input  class="form-control" type="text" v-model="att_ocupation" required/>
-                    </div>
+                <form>
+                   
+                <div class="form-group row">
+                <label class="col-sm-5">Ocupación</label>
+                <div class="col-sm-6">
+                    <input  class="form-control" type="text" v-model="registro.att_ocupation" required/>
+                </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-5">Compañía</label>
                     <div class="col-sm-6">
-                        <input  class="form-control" type="text" v-model="att_company" required/>
+                        <input  class="form-control" type="text" v-model="registro.att_company" required/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-5">Número de Teléfono de la Oficina</label>
                     <div class="col-sm-6">
-                        <input  class="form-control" type="text" v-model="att_office_phone" required/>
+                        <input  class="form-control" type="text" v-model="registro.att_office_phone" required/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="regist_status_type" class="col-sm-5">Tipo de Parentesco</label>
                     <div class="col-sm-6">
-                        <select class="form-select" v-model="kinship_type" aria-label="Default select example" required>
+                        <select class="form-select" v-model="registro.kinship_type.id" aria-label="Default select example" required>
                             <option selected disabled value=""></option>
                             <option value="31">Padre</option>
                             <option value="32">Madre</option>
@@ -53,12 +54,13 @@
                 <div class="form-group row">
                     <label class="col-sm-5">Persona</label>
                     <div class="col-sm-6">
-                        <input  class="form-control" type="text" v-model="per_id" required/>
+                        <input  class="form-control" type="text" v-model="registro.per_id.id" required/>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-danger" v-on:click="agregar()">Guardar</button>
+                <button type="submit" class="btn btn-danger" v-on:click="guardar()">Guardar</button>
                 &nbsp &nbsp <b-button to="/admin/attendant"  variant="dark">Ir al Listado</b-button>
-               </form>
+               
+                </form>        
             </template>
     
             </card>
@@ -75,68 +77,68 @@
 
     export default {
     
-    name:'CreatePersons',
+    name:'EditAttendant',
     components: {
         Card
     },
     data(){
         return{
-        datos: null,
-        id:"",
-        att_ocupation:"",
-        att_company:"",
-        att_office_phone:"",
-        kinship_type:"",
-        per_id:"",
+            datos: [],
+            registro: {
+                id: '',
+                att_ocupation: '',
+                att_company: '',
+                att_office_phone: '',
+                kinship_type: '',
+                per_id: '',
+ 
+            }
+        
         }
     },
     methods:{
-        agregar(){
+        async guardar(){
             const Swal = require('sweetalert2')
-            let post = {
-                "id":this.id,
-                "att_ocupation":this.att_ocupation,
-                "att_company":this.att_company,
-                "att_office_phone":this.att_office_phone,
-                "kinship_type":this.kinship_type,
-                "per_id":this.per_id,
-            }
-            axios.post('http://127.0.0.1:8000/api/Attendant/',post)
-            .then(result => {
-                this.id="";
-                this.att_ocupation="";
-                this.att_company="";
-                this.att_office_phone="";
-                this.kinship_type="";
-                this.per_id="";
-                Swal.fire({
-                    title: 'Acudiente Agregado',
-                    text: '¡Se ha creado correctamente!',
+            const id = this.$route.params.id
+            const path = 'http://127.0.0.1:8000/api/Attendant/' + id  + "/"
+            console.log(this.registro)
+            const response = await axios.put(path, {
+                "att_ocupation": this.registro.att_ocupation,
+                "att_company": this.registro.att_company,
+                "att_office_phone": this.registro.att_office_phone,
+                "kinship_type": this.registro.kinship_type.id,
+                "per_id": this.registro.per_id.id,    
+            })
+            Swal.fire({
+                    title: 'Acudiente Editado',
+                    text: '¡Se ha editado correctamente!',
                     icon: 'success',
                     showConfirmButton: false,
-                    timer: 8000
+                    timer: 3000
                     })
-                console.log(result)
-            })
-            .catch((error) => {
-            console.log(error)
-        })
-        
-        },
-       
+            console.log(response)
+        }
     },
-    mounted() {
+
+    async beforeMount(){
         const path = 'http://127.0.0.1:8000/api/Attendant/'
-        axios.get(path).then((response) => {
-            this.datos = response.data
-            console.log(this.datos);
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-      },
+        const response = await axios.get(path)
+        const registro = response.data.filter(registro => registro.id == this.$route.params.id);
+        this.$data.registro = registro[0];
+        console.log(this.$data.registro)
+      
+    }
+  
     }
   </script>
   <style lang="css" scoped>
   </style>
   
+
+
+
+
+
+
+
+

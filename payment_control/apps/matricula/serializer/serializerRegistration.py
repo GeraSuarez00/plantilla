@@ -37,6 +37,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
                 'nombre': instance.stu_id.per_id.per_names,
                 'apellidos':instance.stu_id.per_id.per_surnames,
                 'identificación':  instance.stu_id.per_id.per_identity_number,   
-                'id': instance.stu_id.per_id.id
+                # 'id': instance.stu_id.per_id.id
+                'id': instance.stu_id.id
             }
         }

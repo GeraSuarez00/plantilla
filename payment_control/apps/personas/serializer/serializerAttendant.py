@@ -14,7 +14,6 @@ class AttendantSerializer(serializers.ModelSerializer):
             'kinship_type':{
                'nombre': instance.kinship_type.maes_names,
                'id': instance.kinship_type.id
-
             },
             'per_id': {
                 'nombre': instance.per_id.per_names,

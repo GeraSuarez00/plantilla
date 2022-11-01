@@ -13,5 +13,9 @@ class PersonSerializer(serializers.ModelSerializer):
             'per_surnames':instance.per_surnames,
             'per_identity_number':instance.per_identity_number,
             'per_birth_date':instance.per_birth_date,
-            'per_personal_phone':instance.per_personal_phone,'per_identification_type':instance.per_identification_type.maes_names
+            'per_personal_phone':instance.per_personal_phone,
+            'per_identification_type': {
+                "nombre":instance.per_identification_type.maes_names,
+                "id":instance.per_identification_type.id
+            }
         }

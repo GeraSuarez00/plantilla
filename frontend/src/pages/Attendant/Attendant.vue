@@ -35,10 +35,10 @@
                     <td>{{dato.kinship_type.nombre}}</td>
                     <td>{{dato.per_id.nombre}} {{dato.per_id.apellidos}}, {{dato.per_id.identificación}}</td>
                     <td>
-                       <!-- <button type="button" class="btn btn-primary" v-on:click="editar(dato.id)">
-                          <i class="nc-icon nc-settings-tool-66 hidden-lg-up"></i>
-                        &nbsp Editar
-                        </button> -->
+                      <button type="button" class="btn btn-secondary" v-on:click="editar(dato.id)">
+                        <i class="nc-icon nc-settings-tool-66 hidden-lg-up"></i>
+                      &nbsp Editar
+                      </button>
                   
                         &nbsp
                       <button type="button"  class="btn btn-danger" v-on:click="eliminar(dato.id)">
@@ -82,21 +82,36 @@
         }
       },
       methods:{
-      // editar(id) {
-      //   console.log(id)
-      //   this.$router.push('create-ae/' + id);
-      // },
-      eliminar(id) {
+      editar(id) {
         console.log(id)
-
-          var op = window.confirm('¿Desea Eliminar el registro?')
-
-          if (op){
-          axios.delete("http://127.0.0.1:8000/api/Attendant/" + id + "/").then(result => {
-          this.mounted()
-          console.log(result);
-           })
-       }
+        this.$router.push('edit-attendant/' + id);
+      },
+      eliminar(id) {
+        const Swal = require('sweetalert2')
+          
+          Swal.fire({
+                    title: 'Confirmación',
+                    text: '¿Está seguro que desea eliminarlo?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#641E16',
+                    cancelButtonColor: '#FF4A55',
+                    confirmButtonText: 'Sí, Elimínalo!',
+                    cancelButtonText: 'No, cancelar!',
+                    reverseButtons: true
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        Swal.fire(
+                          '¡Eliminado!',
+                          'El elemento se ha eliminado correctamente.',
+                          'success'
+                        )
+                        axios.delete("http://127.0.0.1:8000/api/Attendant/" + id + "/").then(result => {
+                        // console.log(result);
+                        })
+                        window.location.reload();
+                      }
+                    })
       },
     }
     }

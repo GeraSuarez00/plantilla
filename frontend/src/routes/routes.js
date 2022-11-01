@@ -7,28 +7,35 @@ import Overview from 'src/pages/Overview.vue'
 
 import Payment from 'src/pages/Payment/Payment.vue'
 import CreatePayment from 'src/pages/Payment/CreatePayment.vue'
+import EditPayment from 'src/pages/Payment/EditPayment.vue'
 
 import Registration from 'src/pages/Registration/Registration.vue'
 import CreateRegistration from 'src/pages/Registration/CreateRegistration.vue'
+import EditRegistration from 'src/pages/Registration/EditRegistration.vue'
 
 import Icons from 'src/pages/Icons.vue'
 import Notifications from 'src/pages/Notifications.vue'
 
 import Datos_Maestros from 'src/pages/Datos_Maestros/Datos_Maestros.vue'
 import CreateDMaes from 'src/pages/Datos_Maestros/CreateDMaes.vue'
+import EditDM from 'src/pages/Datos_Maestros/EditDM.vue'
 
 import Students from 'src/pages/Student/Students.vue'
 import CreateStudent from 'src/pages/Student/CreateStudent.vue'
+import EditStudent from 'src/pages/Student/EditStudent.vue'
 
 import Attendant from 'src/pages/Attendant/Attendant.vue'
 import CreateAttendant from 'src/pages/Attendant/CreateAttendant.vue'
+import EditAttendant from 'src/pages/Attendant/EditAttendant.vue'
 
 import Persons from 'src/pages/Persons/Persons.vue'
 import CreatePersons from 'src/pages/Persons/CreatePersons.vue'
+import EditPersona from 'src/pages/Persons/EditPersona.vue'
+
 
 import acu_estu from 'src/pages/Acu-Estu/Acu-Estu.vue'
 import CreateAE from 'src/pages/Acu-Estu/CreateAE.vue'
-import EditRegistration from 'src/pages/Registration/EditRegistration.vue'
+import EditAE from 'src/pages/Acu-Estu/EditAE.vue'
 
 
 
@@ -59,6 +66,11 @@ const routes = [
         component: CreateStudent
       },
       {
+        path: 'edit-student/:id',
+        name: 'EditStudent',
+        component: EditStudent
+      },
+      {
         path: 'attendant',
         name: 'Attendant',
         component: Attendant
@@ -69,9 +81,19 @@ const routes = [
         component: CreateAttendant
       },
       {
+        path: 'edit-attendant/:id',
+        name: 'EditAttendant',
+        component: EditAttendant
+      },
+      {
         path: 'persons',
         name: 'Persons',
         component: Persons
+      },
+      {
+        path: 'edit-persona/:id',
+        name: 'EditPersona',
+        component: EditPersona
       },
       {
         path: 'create-person',
@@ -89,6 +111,11 @@ const routes = [
         component: CreateAE
       },
       {
+        path: 'edit-ae/:id',
+        name: 'EditAE',
+        component: EditAE
+      },
+      {
         path: 'payment',
         name: 'Payment',
         component: Payment
@@ -97,6 +124,11 @@ const routes = [
         path: 'create-payment',
         name: 'CreatePayment',
         component: CreatePayment,
+      },
+      {
+        path: 'edit-payment/:id',
+        name: 'EditPayment',
+        component: EditPayment
       },
       {
         path: 'registration',
@@ -127,6 +159,11 @@ const routes = [
         path: 'ajustes',
         name: 'Datos_Maestros',
         component: Datos_Maestros
+      },
+      {
+        path: 'edit-dm/:id',
+        name: 'EditDM',
+        component: EditDM
       },
       {
         path: 'create-dm',

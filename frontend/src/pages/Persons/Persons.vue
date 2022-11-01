@@ -35,7 +35,7 @@
                     <td>{{dato.id}}</td>
                     <td>{{dato.per_names}}</td>
                     <td>{{dato.per_surnames}}</td>
-                    <td>{{dato.per_identification_type}}</td>
+                    <td>{{dato.per_identification_type.nombre}}</td>
                     <td>{{dato.per_identity_number}}</td>
                     <td>{{dato.per_birth_date}}</td>
                     <td>{{dato.per_personal_phone}}</td>
@@ -91,15 +91,31 @@
         this.$router.push('edit-persona/' + id);
       },
       eliminar(id) {
-          var op = window.confirm('¿Desea Eliminar el registro?')
-
-          if (op){
-          axios.delete("http://127.0.0.1:8000/api/Person/" + id + "/").then(result => {
-
-          console.log(result);
-          window.location.reload();
-           })
-       }
+        const Swal = require('sweetalert2')
+          
+          Swal.fire({
+                    title: 'Confirmación',
+                    text: '¿Está seguro que desea eliminarlo?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#641E16',
+                    cancelButtonColor: '#FF4A55',
+                    confirmButtonText: 'Sí, Elimínalo!',
+                    cancelButtonText: 'No, cancelar!',
+                    reverseButtons: true
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        Swal.fire(
+                          '¡Eliminado!',
+                          'El elemento se ha eliminado correctamente.',
+                          'success'
+                        )
+                        axios.delete("http://127.0.0.1:8000/api/Person/" + id + "/").then(result => {
+                        // console.log(result);
+                        })
+                        window.location.reload();
+                      }
+                    })
       },
     }
     }

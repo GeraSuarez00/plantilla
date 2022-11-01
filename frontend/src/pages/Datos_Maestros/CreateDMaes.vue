@@ -17,7 +17,6 @@
                </template>
                <template slot="header">
                 <form>
-                <!-- <form @submit="onSubmit"> -->
                 <div class="form-group row">
                     <label  class="col-sm-5">Nombre</label>
                     <div class="col-sm-6">
@@ -78,6 +77,7 @@
     },
     methods:{
         agregar(){
+            const Swal = require('sweetalert2')
             let post = {
                 "id":this.id,
                 "maes_names":this.maes_names,
@@ -92,20 +92,21 @@
                 this.maes_value="";
                 this.maes_dependency="";
                 this.maes_status_type="";
-                this.updated()
-                alert('Se ha agregado correctamente')
+                Swal.fire({
+                    title: 'Dato Maestro Agregado',
+                    text: '¡Se ha creado correctamente!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 8000
+                    })
+                
                 console.log(result)
             })
             .catch((error) => {
             console.log(error)
         })
         },
-        updated() {
-          let direccion = "http://127.0.0.1:8000/api/DatosMaestros/";
-          axios.get(direccion).then(response => {
-            this.datos = response.data
-          })
-        }
+        
     },
     mounted() {
         const path = 'http://127.0.0.1:8000/api/DatosMaestros/'

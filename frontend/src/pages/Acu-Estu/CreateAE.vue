@@ -44,7 +44,8 @@
   </template>
   <script>
   import axios from 'axios';
-  import Card from 'src/components/Cards/Card.vue'
+  import Card from 'src/components/Cards/Card.vue';
+  import Swal from 'sweetalert2';
 
     export default {
     
@@ -62,6 +63,7 @@
     },
     methods:{
         agregar(){
+            const Swal = require('sweetalert2')
             let post = {
                 "id":this.id,
                 "sa_stu_id":this.sa_stu_id,
@@ -72,21 +74,19 @@
                 this.id="";
                 this.sa_stu_id="";
                 this.sa_att_id="";
-                this.updated()
-                alert('Se ha agregado correctamente')
+                Swal.fire({
+                    title: 'Elemento de Acudiente-Estudiante Agregado',
+                    text: '¡Se ha creado correctamente!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 8000
+                    })
                 console.log(result)
             })
             .catch((error) => {
             console.log(error)
         })
         },
-        
-        updated() {
-          let direccion = "http://127.0.0.1:8000/api/Student_Attendant/";
-          axios.get(direccion).then(response => {
-            this.datos = response.data
-          })
-        }
     },
     mounted() {
         const path = 'http://127.0.0.1:8000/api/Student_Attendant/'

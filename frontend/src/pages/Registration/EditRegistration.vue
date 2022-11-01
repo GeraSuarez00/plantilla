@@ -34,7 +34,7 @@
                     <label for="reg_course_type" class="col-sm-5">Curso</label>
                     <div class="col-sm-6">
                         <select class="form-select"  aria-label="Default select example" v-model="registro.reg_course_type.id" required>
-                            <option selected disabled value=""></option>
+                            <option selected disabled value="">Escoja una opción</option>
                             <option value="38">pre-jardín</option>
                             <option value="39">Jardín</option>
                             <option value="40">Transición</option>
@@ -50,7 +50,7 @@
                     <label for="reg_group_type" class="col-sm-5">Grupo</label>
                     <div class="col-sm-6">
                         <select class="form-select"  aria-label="Default select example" v-model="registro.reg_group_type.id" required>
-                            <option selected disabled value=""></option>
+                            <option selected disabled value="">Escoja una opción</option>
                             <option value="47">01</option>
                             <option value="48">02</option>
                             <option value="49">03</option>
@@ -61,7 +61,7 @@
                     <label for="student_history_type" class="col-sm-5">Historial de Estudiante</label>
                     <div class="col-sm-6">
                         <select class="form-select"  aria-label="Default select example" v-model="registro.student_history_type.id" required>
-                            <option selected disabled value=""></option>
+                            <option selected disabled value="">Escoja una opción</option>
                             <option value="5">Antiguo</option>
                             <option value="6">Nuevo</option>
                         </select>
@@ -71,7 +71,7 @@
                     <label for="school_level" class="col-sm-5">Nivel Escolar</label>
                     <div class="col-sm-6">
                         <select class="form-select"  aria-label="Default select example" v-model="registro.school_level.id" required>
-                            <option selected disabled value=""></option>
+                            <option selected disabled value="">Escoja una opción</option>
                             <option value="8">Preescolar</option>
                             <option value="9">Primaria</option>
                         </select>
@@ -82,7 +82,7 @@
                     <label for="regist_status_type" class="col-sm-5">Estado de Matrícula</label>
                     <div class="col-sm-6">
                         <select class="form-select"  aria-label="Default select example" v-model="registro.regist_status_type.id" required>
-                            <option selected disabled value=""></option>
+                            <option selected disabled value="">Escoja una opción</option>
                             <option value="11">Activo</option>
                             <option value="12">Inactivo</option>
                         </select>
@@ -110,7 +110,7 @@
   </template>
   <script>
   import axios from 'axios';
-  import Card from 'src/components/Cards/Card.vue'
+  import Card from 'src/components/Cards/Card.vue';
 
     export default {
     
@@ -122,7 +122,7 @@
         return{
             datos: [],
             registro: {
-                regisId: "",
+                id:"",
                 reg_year: "",
                 reg_value: "",
                 reg_course_type: "",
@@ -137,6 +137,7 @@
     },
     methods:{
         async guardar(){
+            const Swal = require('sweetalert2')
             const id = this.$route.params.id
             const path = 'http://127.0.0.1:8000/api/Registration/' + id  + "/"
             console.log(this.registro)
@@ -150,7 +151,13 @@
                 "regist_status_type": this.registro.regist_status_type.id,
                 "stu_id": this.registro.stu_id.id,
             })
-            
+            Swal.fire({
+                    title: 'Matrícula Editada',
+                    text: '¡Se ha editado correctamente!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                    })
             console.log(response)
         }
     },

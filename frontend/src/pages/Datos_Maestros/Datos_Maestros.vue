@@ -25,7 +25,7 @@
                   <td>Valor</td>
                   <td>Dependencia</td>
                   <td>Estado</td>
-                  <!-- <td>Acciones</td> -->
+                  <td>Acciones</td>
                 </tr>
               </thead>
               <tbody v-for="dato in datos">
@@ -35,13 +35,12 @@
                   <td>{{dato.maes_value}}</td>
                   <td>{{dato.maes_dependency}}</td>
                   <td>{{dato.maes_status_type}}</td>
-                  <!-- <td>
-                    <a href="#" class="btn btn-secondary btn-sm">
-                      <i class="nc-icon nc-settings-tool-66 hidden-lg-up"></i>
+                  <td>
+                    <button type="button" class="btn btn-secondary" v-on:click="editar(dato.id)">
+                        <i class="nc-icon nc-settings-tool-66 hidden-lg-up"></i>
                       &nbsp Editar
-                    </a>
-                    &nbsp
-                  </td> -->
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -74,6 +73,12 @@ export default {
     data(){
       return{
         datos:[]
+      }
+    },
+    methods:{
+      editar(id) {
+        console.log(id)
+        this.$router.push('edit-dm/' + id);
       }
     }
   }

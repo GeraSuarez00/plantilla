@@ -31,7 +31,8 @@ class PaymentSerializer(serializers.ModelSerializer):
             'identificación': instance.reg_id.stu_id.per_id.per_identity_number, 
             'nombre': instance.reg_id.stu_id.per_id.per_names, 
             'apellidos': instance.reg_id.stu_id.per_id.per_surnames, 
-            'id': instance.reg_id.stu_id.per_id.id
+            # 'id': instance.reg_id.stu_id.per_id.id
+            'id': instance.reg_id.id
             }
         }
     

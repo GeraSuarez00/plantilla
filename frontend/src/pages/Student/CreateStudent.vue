@@ -23,16 +23,7 @@
                         <input  class="form-control" type="text" v-model="stu_address" required/>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="regist_status_type" class="col-sm-5">Estado</label>
-                    <div class="col-sm-6">
-                        <select class="form-select" v-model="status_type" aria-label="Default select example" required>
-                            <option selected disabled value=""></option>
-                            <option value="2">Activo</option>
-                            <option value="3">Inactivo</option>
-                        </select>
-                    </div>
-                </div>
+                
                 <div class="form-group row">
                     <label for="regist_status_type" class="col-sm-5">Nacionalidad</label>
                     <div class="col-sm-6">
@@ -77,13 +68,14 @@
         datos: null,
         id:"",
         stu_address:"",
-        status_type:"",
+        status_type:"2",
         nationality_type:"",
         per_id:"",
         }
     },
     methods:{
         agregar(){
+            const Swal = require('sweetalert2')
             let post = {
                 "id":this.id,
                 "stu_address":this.stu_address,
@@ -98,21 +90,19 @@
                 this.status_type="";
                 this.nationality_type="";
                 this.per_id="";
-                this.updated()
-                alert('Se ha agregado correctamente')
+                Swal.fire({
+                    title: 'Estudiante Agregado',
+                    text: '¡Se ha creado correctamente!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 8000
+                    })
                 console.log(result)
             })
             .catch((error) => {
             console.log(error)
-        })
-        
+        })     
         },
-        updated() {
-          let direccion = "http://127.0.0.1:8000/api/Student/";
-          axios.get(direccion).then(response => {
-            this.datos = response.data
-          })
-        }
     },
     mounted() {
         const path = 'http://127.0.0.1:8000/api/Student/'
